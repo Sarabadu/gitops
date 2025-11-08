@@ -24,3 +24,4 @@ spec:
       selfHeal: true  # Automatically fix configuration drift
     syncOptions:
       - CreateNamespace=true # Optional: Auto-create the destination namespace if it doesn't exist
+  project: default        # The Argo CD project this application belongs to
