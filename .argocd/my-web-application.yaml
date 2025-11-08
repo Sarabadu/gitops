@@ -11,7 +11,6 @@ spec:
     repoURL: https://github.com/Sarabadu/gitops.git # e.g., https://github.com/org/repo.git
     targetRevision: HEAD             # Which branch/tag to track (e.g., main, HEAD, v1.0.0)
     path: charts/my-web-app         # The subdirectory in this repo with your k8s YAMLs (e.g., manifests/dev)
-    chart: my-web-app
 
 
   # 3. DESTINATION: Where to deploy the application (the cluster and namespace)
