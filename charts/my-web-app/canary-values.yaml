@@ -1,0 +1,4 @@
+image:
+  tag: "v1.0.1"
+# Set replicas for the canary to a small number
+replicaCount: 1
