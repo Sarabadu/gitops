@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  # 1. The name you want to see in the Argo CD UI
+  name: test-app
+  # The namespace where the Application resource lives (usually 'argocd')
+  namespace: argocd
+spec:
+  # 2. SOURCE: Where the application manifests are stored (i.e., this Git repo)
+  source:
+    repoURL: https://github.com/Sarabadu/gitops.git # e.g., https://github.com/org/repo.git
+    targetRevision: HEAD             # Which branch/tag to track (e.g., main, HEAD, v1.0.0)
+    path: manifests/dev              # The subdirectory in this repo with your k8s YAMLs (e.g., manifests/dev)
+
+  # 3. DESTINATION: Where to deploy the application (the cluster and namespace)
+  destination:
+    server: https://kubernetes.default.svc  # Typically the same cluster Argo CD is running in
+    namespace: my-app-staging # The namespace where the app will be deployed (e.g., my-app-staging)
+
+  # 4. SYNC POLICY: How Argo CD should handle drift (like the OutOfSync status)
+  syncPolicy:
+    automated:
+      prune: true     # Allows Argo CD to delete resources not in Git
+      selfHeal: true  # Automatically fix configuration drift
+    syncOptions:
+      - CreateNamespace=true # Optional: Auto-create the destination namespace if it doesn't exist
